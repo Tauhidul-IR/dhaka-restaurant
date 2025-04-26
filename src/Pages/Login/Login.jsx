@@ -6,13 +6,14 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 
 const Login = () => {
-const captchaRef = useRef(null);
+
 const [disabled, setDisabled] = useState(true);
 
 
@@ -36,14 +37,31 @@ const { signIn } = useContext(AuthContext);
     .then(result => {
       const user = result.user;
       console.log(user);
+      Swal.fire({
+        title: "User Login SuccessFull",
+        showClass: {
+          popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    `,
+        },
+        hideClass: {
+          popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    `,
+        },
+      });
     })
   };
 
 
   const handleValidateCaptcha = (e) => {
-    const user_captcha_value = captchaRef.current.value
+    // const user_captcha_value = captchaRef.current.value
    
-    // const user_captcha_value = e.target.value;
+    const user_captcha_value = e.target.value;
     // console.log(user_captcha_value);
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
@@ -98,16 +116,16 @@ const { signIn } = useContext(AuthContext);
                   <LoadCanvasTemplate />
                 </label>
                 <input
-                  //   onBlur={handleValidateCaptcha}
-                  ref={captchaRef}
+                    onBlur={handleValidateCaptcha}
+                  
                   type="text"
                   name="captcha"
                   placeholder="type the captcha above"
                   className="input input-bordered"
                 />
-                <button onClick={handleValidateCaptcha} className="btn btn-xs w-80 mt-2">
+                {/* <button  className="btn btn-xs w-80 mt-2">
                   validate
-                </button>
+                </button> */}
               </div>
 
               {/* submit button  */}

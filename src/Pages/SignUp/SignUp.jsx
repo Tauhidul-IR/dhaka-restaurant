@@ -1,60 +1,69 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, useWatch } from "react-hook-form";
-import image from "../../assets/others/authentication2.png"
+import image from "../../assets/others/authentication2.png";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-
-
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-//   const axiosPublic = useAxiosPublic();
+  //   const axiosPublic = useAxiosPublic();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
-    // reset,
+    reset,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
 
-
-
-  const onSubmit = data => {
-    console.log(data)
-    createUser(data.email, data.password)
-    .then((result) => {
+  const onSubmit = (data) => {
+    console.log(data);
+    createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
-
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          console.log("user profile update");
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "update user successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate('/');
+        })
+        .catch((error) => console.log(error));
     });
   };
 
-//   const onSubmit = (data) => {
-//     createUser(data.email, data.password).then((result) => {
-//       const loggedUser = result.user;
-//       console.log(loggedUser);
-//       const userInfo = {
-//         name: data.name,
-//         email: data.email,
-//       };
-//       axiosPublic.post("/users", userInfo).then((res) => {
-//         if (res.data.insertedId) {
-//           console.log("user added to the database");
-//           reset();
-//           Swal.fire({
-//             position: "top-end",
-//             icon: "success",
-//             title: "User created successfully.",
-//             showConfirmButton: false,
-//             timer: 1500,
-//           });
-//           navigate("/");
-//           reset();
-//         }
-//       });
-//     });
-//   };
+  //   const onSubmit = (data) => {
+  //     createUser(data.email, data.password).then((result) => {
+  //       const loggedUser = result.user;
+  //       console.log(loggedUser);
+  //       const userInfo = {
+  //         name: data.name,
+  //         email: data.email,
+  //       };
+  //       axiosPublic.post("/users", userInfo).then((res) => {
+  //         if (res.data.insertedId) {
+  //           console.log("user added to the database");
+  //           reset();
+  //           Swal.fire({
+  //             position: "top-end",
+  //             icon: "success",
+  //             title: "User created successfully.",
+  //             showConfirmButton: false,
+  //             timer: 1500,
+  //           });
+  //           navigate("/");
+  //           reset();
+  //         }
+  //       });
+  //     });
+  //   };
 
   return (
     <>
@@ -64,13 +73,12 @@ const SignUp = () => {
       <div className="hero min-h-screen bg-base-200 pt-24">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-           
             <img src={image} alt="" />
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-            {/* <form className="card-body"> */}
-            <h1 className="text-5xl font-bold">Sign up now!</h1>
+              {/* <form className="card-body"> */}
+              <h1 className="text-5xl font-bold">Sign up now!</h1>
 
               <div className="form-control">
                 <label className="label">
@@ -88,8 +96,6 @@ const SignUp = () => {
                 )}
               </div>
 
-
-
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Photo URL</span>
@@ -105,8 +111,6 @@ const SignUp = () => {
                 )}
               </div>
 
-
-              
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>

@@ -8,8 +8,10 @@ import {
 //   GoogleAuthProvider,
 //   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 //   onAuthStateChanged,
@@ -26,7 +28,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-//   const googleProvider = new GoogleAuthProvider();
+  const googleProvider = new GoogleAuthProvider();
 //   const axiosPublic = useAxiosPublic();
 
   const createUser = (email, password) => {
@@ -39,10 +41,10 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-//   const googleSignIn = () => {
-//     setLoading(true);
-//     return signInWithPopup(auth, googleProvider);
-//   };
+  const googleSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
 
   const logOut = () => {
     setLoading(true);
@@ -86,7 +88,7 @@ const AuthProvider = ({ children }) => {
     loading,
     createUser,
     signIn,
-    // googleSignIn,
+    googleSignIn,
     logOut,
     updateUserProfile,
   };

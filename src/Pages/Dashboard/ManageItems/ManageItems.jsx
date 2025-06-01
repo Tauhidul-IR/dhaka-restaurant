@@ -8,7 +8,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 // import useMenu from "../../../hooks/useMenu";
 
 const ManageItems = () => {
-  const [menu, refetch] = useMenu();
+  const [menu, refetch ] = useMenu();
   const axiosSecure = useAxiosSecure();
 
   const handleDeleteItem = (item) => {
@@ -26,6 +26,7 @@ const ManageItems = () => {
         console.log(res.data);
         if (res.data.deletedCount > 0) {
           // refetch to update the ui
+          
           refetch();
           Swal.fire({
             position: "top-end",

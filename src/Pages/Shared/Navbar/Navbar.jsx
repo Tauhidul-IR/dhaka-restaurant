@@ -31,9 +31,7 @@ import useAdmin from "../../../hooks/useAdmin";
           <li>
             <Link to={"/order/salad"}>Order</Link>
           </li>
-          <li>
-            <Link to={"/secret"}>secret</Link>
-          </li>
+         
           {user && isAdmin && (
         <li>
           <Link to={"/dashboard/adminHome"}>Dashboard</Link>
@@ -73,7 +71,7 @@ import useAdmin from "../../../hooks/useAdmin";
     {navOption}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">Dhaka Restaurent</a>
+    <a className="btn btn-ghost text-xl">Dhaka Dine</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">

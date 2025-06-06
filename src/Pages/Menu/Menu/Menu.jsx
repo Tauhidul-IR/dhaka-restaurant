@@ -23,7 +23,7 @@ const Menu = () => {
   return (
     <div>
       <Helmet>
-        <title>Dhaka Restaurant | Menu</title>
+        <title>Dhaka Dine | Menu</title>
       </Helmet>
       <Cover img={menuImg} title="our menu"></Cover>
       <SectionTitle

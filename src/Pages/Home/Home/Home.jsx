@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>Dhaka Restaurant | Menu</title>
+        <title>Dhaka Dine | Menu</title>
       </Helmet>
       <Banner></Banner>
       <Category></Category>

@@ -67,7 +67,7 @@ import useAdmin from "../../../hooks/useAdmin";
       </div>
       <ul
         tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        className="menu menu-sm dropdown-content text-black bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
     {navOption}
       </ul>
     </div>
@@ -78,17 +78,17 @@ import useAdmin from "../../../hooks/useAdmin";
       {navOption}
     </ul>
   </div>
-  <div className="navbar-end">
+  <div className="navbar-end text-black">
   {user ? (
             <>
               <button onClick={handleLogOut}>
-                <a className="btn btn-outline btn-warning">Logout</a>
+                <a className="btn btn-warning">Logout</a>
               </button>
             </>
           ) : (
             <>
               <Link to={"/login"}>
-                <a className="btn btn-outline btn-warning">login</a>
+                <a className="btn btn-warning">login</a>
               </Link>
             </>
           )}

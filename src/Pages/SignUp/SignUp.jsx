@@ -26,7 +26,8 @@ const SignUp = () => {
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("user profile update");
+          console.log("user profile update", data.name);
+          navigate("/");
           const userInfo = {
             name: data.name,
             email: data.email,
